@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111918">
+  <meta name="description" content="一款職場黑色幽默敘事遊戲。白天守品質，晚上守群組。虛構製造所的一個工作日。">
+  <title>品保工程師的一天 · 第零製造所</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/data.js"></script>
+  <script defer src="js/engine.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#event-panel">跳至目前事件</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="工作日導覽">
+      <a class="brand" href="#" aria-label="品保工程師的一天首頁"><span class="brand-icon">Q<span>!</span></span><span>第零製造所<small>QUALITY OPERATIONS</small></span></a>
+      <div class="system-status"><i></i> 系統正常 <span>人員狀態另計</span></div>
+      <div class="sidebar-label">我的工作日 <span>DAY 01</span></div>
+      <nav class="nav-list">
+        <button class="nav-active" id="nav-work"><span>▦</span> 異常處理台 <b id="task-badge">01</b></button>
+        <button id="nav-quests"><span>☷</span> 支線追蹤 <b>03</b></button>
+        <button id="nav-roles"><span>◇</span> 職能與代班 <b>08</b></button>
+        <button id="nav-log"><span>≡</span> 交接紀錄 <b id="log-badge">00</b></button>
+        <button id="nav-endings"><span>☆</span> 結局檔案 <b id="ending-badge">00</b></button>
+      </nav>
+      <div class="shift-card"><span class="sidebar-label">今日排程</span><div class="shift-top"><b>08:30 — 18:00</b><span id="shift-status">日班</span></div><div class="shift-line"><div id="shift-progress"></div></div><p id="shift-caption">表定下班，不代表停止收件。</p></div>
+      <div class="sidebar-bottom"><p>「只問一下。」<br><span>— 每個加班的開場白</span></p><button id="help-button">?　遊玩說明</button><small>內部系統 v1.0 · 全部虛構</small></div>
+    </aside>
+    <main>
+      <header class="topbar"><div><span class="breadcrumb">內部系統 / 工作日模擬</span><span class="mobile-brand">第零製造所</span></div><div class="topbar-right"><span id="save-state">本機自動存檔</span><button id="mobile-help" aria-label="遊玩說明">?</button><button id="restart-button" title="保留結局收藏並重新開始">↻ <span>重新開始</span></button></div></header>
+      <section class="page-heading"><div><span class="eyebrow">A VERY NORMAL WORKDAY</span><h1>品保工程師的一天<span>。</span></h1><p>白天守品質，晚上守群組。</p></div><div class="day-stamp"><span>工作日 / 001</span><b id="clock">08:30</b><small id="clock-caption">距離表定下班還有很久</small></div></section>
+      <section class="metrics" aria-label="工作日數值" id="metrics"></section>
+      <div class="workspace">
+        <div class="primary-column">
+          <section class="factory-view" aria-label="虛構液冷機櫃產線場景">
+            <div class="scene-head"><span><i></i> R-00 批次監控</span><span id="scene-location">收料區</span></div>
+            <div class="pixel-scene" aria-hidden="true"><div class="scene-grid"></div><div class="rack rack-one"><i></i><i></i><i></i><i></i><span>R-00</span></div><div class="rack rack-two"><i></i><i></i><i></i><i></i><span>R-01</span></div><div class="pipe"><i></i><i></i><i></i></div><div class="bench"><span></span><b>MANIFOLD</b></div><div class="pixel-person"><div class="hair"></div><div class="head"></div><div class="shirt"></div><div class="legs"></div></div><div class="speech" id="scene-speech">今天應該可以準時吧。</div><div class="plant-floor"></div><div class="scene-caption">LIQUID COOLING / ASSEMBLY LINE</div></div>
+            <div class="scene-foot"><span>● 產線在線</span><span id="scene-role">目前派任：IQC</span><span>人力配置：你</span></div>
+          </section>
+          <section class="event-card" id="event-panel" tabindex="-1" aria-labelledby="event-title"></section>
+        </div>
+        <aside class="right-column">
+          <section class="panel role-panel" id="roles-panel"><div class="panel-title"><h2>今日身分</h2><span>ROLE</span></div><div class="current-role"><div id="role-symbol">IQC</div><div><h3 id="role-name">進料檢驗</h3><p id="role-status">臨時代班</p></div></div><p class="role-quote" id="role-quote"></p><div class="role-select-label"><label for="role-select">切換已解鎖職能</label><span id="role-count">2 / 8</span></div><select id="role-select" aria-describedby="role-hint"></select><p class="small-note" id="role-hint">本事件指定職能會獲得處置加成。</p><div class="role-grid" id="role-grid"></div></section>
+          <section class="panel quests-panel" id="quests-panel"><div class="panel-title"><h2>支線追蹤</h2><span>3 CASES</span></div><div id="quests"></div></section>
+          <section class="memo"><span>今日系統提醒</span><p id="memo-text">你的職稱只有一個。<br>你的工作內容不是。</p><small>此通知無法申請撤回。</small></section>
+        </aside>
+      </div>
+      <section class="panel log-panel" id="log-panel"><div class="panel-title"><h2>交接紀錄 <span class="muted">/ 今天不是白忙的證據</span></h2><button id="download-log">↓ 匯出紀錄</button></div><div id="log-list"></div></section>
+      <footer><span>全部情節、角色、批次與組織皆為虛構。製造場景僅供敘事使用。</span><span>今天的你，辛苦了。</span></footer>
+    </main>
+  </div>
+  <dialog id="dialog"><div class="dialog-head"><h2 id="dialog-title"></h2><button id="dialog-close" aria-label="關閉視窗">×</button></div><div id="dialog-content"></div></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <noscript>請啟用 JavaScript 以遊玩《品保工程師的一天》。</noscript>
+</body>
+</html>
